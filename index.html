@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Luan DevWeb</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <div class="desconectar">
+        <button onclick="X()">(X)</button>
+    </div>
+
+<div class="form">
+
+    <img src="cine.png">
+    Digite o seu nome completo:<br>
+    <input type="text" id="nome" placeholder="Ex: Luan Rodrigues Da Silva" required autofocus>
+    Quantidade de ingressos:
+
+    <input type="number" id="ingressos" required>
+
+   <button onclick="Teste()">COMPRAR</button>
+   <button  id="desistir" onclick="Limpar()">DESISTIR</button>
+
+   
+
+
+
+</div>
+
+
+<script>
+
+
+
+    
+var teste = localStorage.getItem("Ingressos")
+
+if(teste === null){
+   sessionStorage.setItem("Ingressos",990)
+  var btn = document.getElementById("desistir")
+  btn.style.display = "none"
+
+} else {
+    sessionStorage.setItem("Ingressos",teste)
+}
+
+function Teste(){
+
+    var nome = document.getElementById("nome").value
+    var ingressohtml = document.getElementById("ingressos").value
+
+
+
+    if((nome == "" || ingressohtml == ""))
+    {
+        alert("Preencha o campo de nome e senha!")
+        window.location.href="index.html"
+    } else{
+
+    var ingressohtml = document.getElementById("ingressos").value
+   
+    if(ingressohtml >=5){
+        alert("Você só pode comprar até 4 ingressos.")
+        window.location.href="index.html"
+    } else{
+
+
+
+        alert("Parabéns, ingresso(s) COMPRADOS!!")
+        var qtdIngresso = sessionStorage.getItem("Ingressos")
+
+        var nome = document.getElementById("nome").value
+        var valorIngresso = 25
+        var soma = parseInt (valorIngresso) * parseInt(ingressohtml)
+        var restante = parseInt(qtdIngresso) - parseInt(ingressohtml)
+        var memoriaAdd = localStorage.setItem("Ingressos",restante)
+        var memoriaRec = localStorage.getItem("Ingressos")
+        var Juntando = sessionStorage.setItem("Ingressos",memoriaRec)
+
+        var resultado = document.getElementById("in")
+
+
+     resultado.innerHTML = "Olá, " + nome + "!<br><br>"
+     + "Você adquiriu : "+ ingressohtml + " ingresso(s) para o filme Luan DevWeb." + "<br><br>"
+     + " O Valor do seu ingresso(s) é de: R$ " + soma + ",00<br><br>"
+     + " Ingressos restantes no site Luan DevWeb: " +"<h2>"+memoriaRec
+       
+        setTimeout(Reload,5000)
+    function Reload(){
+        window.location.href = "index.html"
+    }
+      
+        }
+       
+        }
+    }
+    
+
+    function Limpar(){
+
+        var prompt = window.prompt("Olá, Estamos triste por você nos abandonar, é uma pena te desapontar :(\n Informe o seu nome!")
+
+        var confirm = window.confirm("Olá "+prompt+ " você realmente quer desistir dos ingressos?")
+
+        if(confirm === true){
+            var qtdDevolver = window.prompt("Digite a quantidade de ingressos a serem devolvidos")
+
+            var pega = localStorage.getItem("Ingressos")
+            var confere = parseInt(qtdDevolver) + parseInt(pega)
+            if(confere > 990){
+                    alert("ERRO! O cinema não pode aceitar mais do que disponibilizou!")
+                    window.location.href = "index.html"
+                }else {
+
+          
+
+            if(qtdDevolver == 1){
+                
+    
+                 alert("Você devolveu: "+ qtdDevolver+ " ingresso(s)")
+                var soma = parseInt(pega)+parseInt(qtdDevolver)
+                var add = localStorage.setItem("Ingressos",soma)
+                window.location.href = "index.html"}
+        
+            if(qtdDevolver == 2){
+               
+                
+                alert("Você devolveu: "+ qtdDevolver+ " ingresso(s)")
+                var soma = parseInt(pega)+parseInt(qtdDevolver)
+                var add = localStorage.setItem("Ingressos",soma)
+                window.location.href = "index.html"
+            }
+            
+            if(qtdDevolver == 3){
+
+                
+                alert("Você devolveu: "+ qtdDevolver+ " ingresso(s)")
+                var soma = parseInt(pega)+parseInt(qtdDevolver)
+                var add = localStorage.setItem("Ingressos",soma)
+                window.location.href = "index.html"
+            }
+            
+            if(qtdDevolver == 4){
+               
+                
+                alert("Você devolveu: "+ qtdDevolver+ " ingresso(s)")
+                var soma = parseInt(pega)+parseInt(qtdDevolver)
+                var add = localStorage.setItem("Ingressos",soma)
+                window.location.href = "index.html"
+    
+            }
+            if(qtdDevolver > 4){
+                alert("Quantidade para devolução inválida, você não pode adquirir: "+qtdDevolver+ " ingressos")
+                window.location.href = "index.html"
+            }}
+        } else {
+            alert("Uhu,é uma honra saber que você voltou pra gente s2! irei te redirecionar")
+            window.location.href = "index.html"
+        }}
+    
+
+        function X(){
+            alert("Navegador formatado!")
+             localStorage.clear()
+             window.location.href = "index.html"
+        }
+
+</script>
+    
+
+<div class="form">
+
+    <span id="in"><h3>Reserve o seu ingresso!<br><br>
+        Ingressos disponíveis:</h3><br>
+            <h2><script>document.write(
+
+                sessionStorage.getItem("Ingressos")
+                
+                )</script></h2></span>
+</div>
+</body>
+</html>
